@@ -342,7 +342,7 @@ cnv_poptbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", 
   }
 
   #periodo
-  suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (length(periodo)==1 & periodo[1] == "last") {periodo <- utils::head(periodos.df$id, 1)} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
 
@@ -438,6 +438,7 @@ cnv_poptbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", 
   form_data <- gsub("\\\\u00", "%", form_data)
 
   ##### REQUEST FORM AND DATA WRANGLING ####
+  print(form_data)
   site <- httr::POST(url = "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?ibge/cnv/poptbr.def",
                      body = form_data)
 
