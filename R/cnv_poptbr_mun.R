@@ -67,8 +67,8 @@ cnv_poptbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", 
 
   #ajuste do conteúdo da tabela
   conteudo.df <- data.frame(id1 = c(1),
-                            id2 = c("Popula\u00e7\u00e3o_residente"),
-                            value = c("Popula\u00e7\u00e3o_residente"))
+                            id2 = c("Popula\u00e7\u00e3o_estimada"),
+                            value = c("Popula\u00e7\u00e3o_estimada"))
 
   periodos.df <- data.frame(id = page %>% rvest::html_nodes("#A option") %>% rvest::html_text() %>% as.numeric(),
                             value = page %>% rvest::html_nodes("#A option") %>% rvest::html_attr("value"))
