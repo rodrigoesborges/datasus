@@ -37,6 +37,7 @@
 #' @param faixa_etaria_2 "all" or a character vector with the age range (written in the same way) or the number corresponding to the order of the option in the online layout to filter the data. Defaults to "all".
 #' @return The function returns a data frame printed by parameters input.
 #' @author Rodrigo Borges based on excellent work by Renato Prado Siqueira  \email{<rodrigo@@borges.net.br>}
+#' @seealso \code{\link{cnv_projpopuf_bruf}}
 #' @seealso \code{\link{sim_evita10_mun}}
 #' @examples
 #' \dontrun{
