@@ -1,14 +1,14 @@
-#' Scrapes Demographic projections of Resident Population from RIPSA
+#' Scrapes Demographic projections of Resident Population from SVS
 #'
 #' This function allows the user to retrieve data from
-#' RIPSA database much in the same way that is done
+#' RIPSA database and SVS studies much in the same way that is done
 #' by the online portal. The argument options refer to
-#' regions and population tipes
+#' regions and population groups
 #'
 #' @usage cnv_projpopuf_bruf(linha = "Unidade_da_Federa%E7%E3o", coluna = "Não ativa",
 #'   conteudo = 1, periodo = "last", regiao = "all", unidade_da_federacao = "all",
 #'   sexo = "all", idade_simples = "all", faixa_etaria_1 = "all", faixa_etaria_2 = "all")
-#' @param linha A character describing which element will be displayed in the rows of the data.frame. Defaults to "Unidade da Federação".
+#' @param linha A character describing which element will be displayed in the rows of the data.frame. Defaults to "Unidade da Unidade_da_Federa%E7%E3o".
 #' @param coluna A character describing which element will be displayed in the columns of the data.frame. Defaults to "Não ativa".
 #' @param conteudo A character of length = 1 with the state's acronym of interest, defaults to "População residente".
 #' @param periodo A character vector describing the period of data. Defaults to the last available.

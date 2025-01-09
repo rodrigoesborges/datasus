@@ -2,14 +2,14 @@
 % Please edit documentation in R/cnv_projpopuf_bruf.R
 \name{cnv_projpopuf_bruf}
 \alias{cnv_projpopuf_bruf}
-\title{Scrapes Demographic projections of Resident Population from RIPSA}
+\title{Scrapes Demographic projections of Resident Population from SVS}
 \usage{
 cnv_projpopuf_bruf(linha = "Unidade_da_Federa%E7%E3o", coluna = "Não ativa",
   conteudo = 1, periodo = "last", regiao = "all", unidade_da_federacao = "all",
   sexo = "all", idade_simples = "all", faixa_etaria_1 = "all", faixa_etaria_2 = "all")
 }
 \arguments{
-\item{linha}{A character describing which element will be displayed in the rows of the data.frame. Defaults to "Unidade da Federação".}
+\item{linha}{A character describing which element will be displayed in the rows of the data.frame. Defaults to "Unidade da Unidade_da_Federa%E7%E3o".}
 
 \item{coluna}{A character describing which element will be displayed in the columns of the data.frame. Defaults to "Não ativa".}
 
@@ -32,9 +32,9 @@ The function returns a data frame printed by parameters input.
 }
 \description{
 This function allows the user to retrieve data from
-RIPSA database much in the same way that is done
+RIPSA database and SVS studies much in the same way that is done
 by the online portal. The argument options refer to
-regions and population tipes
+regions and population groups
 }
 \examples{
 \dontrun{

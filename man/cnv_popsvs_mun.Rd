@@ -65,7 +65,7 @@ The function returns a data frame printed by parameters input.
 This function allows the user to retrieve data from
 RIPSA database and SVS studies much in the same way that is done
 by the online portal. The argument options refer to
-regions and population tipes
+regions and population groups
 }
 \examples{
 \dontrun{

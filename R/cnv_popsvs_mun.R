@@ -3,7 +3,7 @@
 #' This function allows the user to retrieve data from
 #' RIPSA database and SVS studies much in the same way that is done
 #' by the online portal. The argument options refer to
-#' regions and population tipes
+#' regions and population groups
 #'
 #' @usage cnv_popsvs_mun(linha = "Município", coluna = "Não ativa",
 #'   conteudo = 1, periodo = "last", regiao = "all", unidade_da_federacao = "all",
