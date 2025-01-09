@@ -45,6 +45,8 @@ cnv_projpopuf_bruf(unidade_da_federacao = 50)
 }
 \seealso{
 \code{\link{cnv_popsvs_mun}}
+
+\code{\link{cnv_poptbr_mun}}
 }
 \author{
 Rodrigo Borges based on excellent work by Renato Prado Siqueira  \email{<rodrigo@borges.net.br>}

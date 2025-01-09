@@ -20,6 +20,7 @@
 #' @return The function returns a data frame printed by parameters input.
 #' @author Rodrigo Borges based on excellent work by Renato Prado Siqueira  \email{<rodrigo@@borges.net.br>}
 #' @seealso \code{\link{cnv_popsvs_mun}}
+#' @seealso \code{\link{cnv_poptbr_mun}}
 #' @examples
 #' \dontrun{
 #' ## Requesting data from the state of Mato Grosso do Sul - MS
