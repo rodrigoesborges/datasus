@@ -9,7 +9,7 @@
 #' data focused on brazilian
 #' cities and age ranging between 5-74 years old.
 #'
-#' @usage qabr_sia_mun(linha = "Município", coluna = "Não ativa",
+#' @usage sia_qabr_mun(linha = "Município", coluna = "Não ativa",
 #'   conteudo = 1, periodo = "last", municipio = "all", capital = "all",
 #'   cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all",
 #'   ride = "all", territorio_da_cidadania = "all", mesorregiao_pndr = "all",
@@ -70,7 +70,7 @@
 #' @importFrom utils head
 #' @export
 
-qabr_sia_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1, periodo = "last", municipio = "all",
+sia_qabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1, periodo = "last", municipio = "all",
                          capital = "all", cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all", ride = "all",
                          territorio_da_cidadania = "all", mesorregiao_pndr = "all", amazonia_legal = "all", semiarido = "all",
                          faixa_de_fronteira = "all", zona_de_fronteira = "all", municipio_de_extrema_pobreza = "all",
