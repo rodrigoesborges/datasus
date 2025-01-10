@@ -5,7 +5,7 @@
 #' by the online portal. The argument options refer to
 #' regions and population groups
 #'
-#' @usage cnv_projpopuf_bruf(linha = "Unidade_da_Federa%E7%E3o", coluna = "Não ativa",
+#' @usage ibge_projpopuf_bruf(linha = "Unidade_da_Federa%E7%E3o", coluna = "Não ativa",
 #'   conteudo = 1, periodo = "last", regiao = "all", unidade_da_federacao = "all",
 #'   sexo = "all", idade_simples = "all", faixa_etaria_1 = "all", faixa_etaria_2 = "all")
 #' @param linha A character describing which element will be displayed in the rows of the data.frame. Defaults to "Unidade da Unidade_da_Federa%E7%E3o".
@@ -19,12 +19,12 @@
 #' @param faixa_etaria_2 "all" or a character vector with the age range (written in the same way) or the number corresponding to the order of the option in the online layout to filter the data. Defaults to "all".
 #' @return The function returns a data frame printed by parameters input.
 #' @author Rodrigo Borges based on excellent work by Renato Prado Siqueira  \email{<rodrigo@@borges.net.br>}
-#' @seealso \code{\link{cnv_popsvs_mun}}
-#' @seealso \code{\link{cnv_poptbr_mun}}
+#' @seealso \code{\link{ibge_popsvs_mun}}
+#' @seealso \code{\link{ibge_poptbr_mun}}
 #' @examples
 #' \dontrun{
 #' ## Requesting data from the state of Mato Grosso do Sul - MS
-#' cnv_projpopuf_bruf(unidade_da_federacao = 50)
+#' ibge_projpopuf_bruf(unidade_da_federacao = 50)
 #' }
 #'
 #' @keywords RIPSA datasus estimativas de população
@@ -32,7 +32,7 @@
 #' @importFrom utils head
 #' @export
 
-cnv_projpopuf_bruf <- function(linha = "Unidade_da_Federa%E7%E3o", coluna = "Faixa Et\u00E1ria 2", conteudo = "População_residente", periodo = "last", regiao = "all",
+ibge_projpopuf_bruf <- function(linha = "Unidade_da_Federa%E7%E3o", coluna = "Faixa Et\u00E1ria 2", conteudo = "População_residente", periodo = "last", regiao = "all",
                               unidade_da_federacao = "all", sexo = "all", idade_simples = "all",
                            faixa_etaria_1 = "all", faixa_etaria_2 = "all") {
 
