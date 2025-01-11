@@ -207,7 +207,7 @@ ibge_popsvs_mun <- function(linha = "Munic\u00edpio", coluna = "Faixa Et\u00e1ri
 
   }
 
-  if (periodo[1] != "last") {
+  if (periodo[1] != "last" & periodo[1] != "all") {
 
     if (is.character(periodo)) {
       periodo <- as.numeric(periodo)
@@ -423,6 +423,7 @@ ibge_popsvs_mun <- function(linha = "Munic\u00edpio", coluna = "Faixa Et\u00e1ri
 
   #periodo
   suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (periodo == "all") {periodo <- periodos.df$id} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
 
