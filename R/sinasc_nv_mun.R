@@ -277,7 +277,7 @@ sinasc_nv_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", c
 
   }
 
-  if (periodo[1] != "last") {
+  if (periodo[1] != "last" & periodo[1] != "all") {
 
     if (is.character(periodo)) {
       periodo <- as.numeric(periodo)
@@ -700,6 +700,7 @@ sinasc_nv_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", c
 
   #periodo
   suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (periodo == "all") {periodo <- periodos.df$id} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
 

@@ -15,7 +15,7 @@ cnes_equipebr_mun(linha = "Município", coluna = "Não ativa", conteudo = 1,
                   esfera_juridica = "all", esfera_administrativa = "all",
                   natureza = "all", tipo_de_estabelecimento = "all",
                   tipo_de_gestao = "all", tipo_de_prestador = "all",
-                  tipo_de_equipe = "all")
+                  tipo_da_equipe = "all")
 }
 \arguments{
 \item{linha}{A character describing which element will be displayed in the rows of the data.frame. Defaults to "Município".}

@@ -146,7 +146,7 @@ ibge_projpopuf_bruf <- function(linha = "Unidade_da_Federa%E7%E3o", coluna = "Fa
 
   }
 
-  if (periodo[1] != "last") {
+  if (periodo[1] != "last" & periodo[1] != "all") {
 
     if (is.character(periodo)) {
       periodo <- as.numeric(periodo)
@@ -267,6 +267,7 @@ ibge_projpopuf_bruf <- function(linha = "Unidade_da_Federa%E7%E3o", coluna = "Fa
 
   #periodo
   suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (periodo == "all") {periodo <- periodos.df$id} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
 

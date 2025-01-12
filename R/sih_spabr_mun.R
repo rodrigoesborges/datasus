@@ -66,7 +66,7 @@
 #' @importFrom utils head
 #' @export
 
-sih_spabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1, periodo = "last", municipio = "all",
+sih_spabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = "Quantidade aprovada", periodo = "last", municipio = "all",
                          capital = "all", cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all", ride = "all",
                          territorio_da_cidadania = "all", mesorregiao_pndr = "all", amazonia_legal = "all", semiarido = "all",
                          faixa_de_fronteira = "all", zona_de_fronteira = "all", municipio_de_extrema_pobreza = "all",
@@ -275,7 +275,7 @@ sih_spabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", c
 
   }
 
-  if (periodo[1] != "last") {
+  if (periodo[1] != "last" & periodo[1] != "all") {
 
     #if (is.character(periodo)) {
     #  periodo <- as.numeric(periodo)
@@ -600,6 +600,7 @@ sih_spabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", c
 
   #periodo
   suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (periodo == "all") {periodo <- periodos.df$id} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
 
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")

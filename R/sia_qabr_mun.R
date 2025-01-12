@@ -298,7 +298,7 @@ sia_qabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
 
   }
 
-  if (periodo[1] != "last") {
+  if (periodo[1] != "last" & periodo[1] != "all") {
 
     #if (is.character(periodo)) {
     #  periodo <- as.numeric(periodo)
@@ -566,6 +566,8 @@ sia_qabr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
 
   #periodo
   suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (periodo[1] == "all") {periodo <- periodos.df$id} )
+
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
 
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
