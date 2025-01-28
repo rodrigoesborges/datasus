@@ -321,8 +321,7 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
     # if (is.character(periodo)) {
     #   periodo <- as.numeric(periodo)
     # }
-    print(periodo)
-    print(paste0(periodos.df$id,collapse=","))
+
     if (!(all(periodo %in% periodos.df$id))) stop("The 'periodo' argument is misspecified")
 
   }
