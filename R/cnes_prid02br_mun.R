@@ -107,7 +107,7 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
                             id2 = "Quantidade",
                             value = "Quantidade")
 
-  periodos.df <- data.frame(id = page %>% rvest::html_nodes("#A option") %>% rvest::html_text(),
+  periodos.df <- data.frame(id = page %>% rvest::html_nodes("#A option") %>% rvest::html_text()%>%trimws(),
                             value = page %>% rvest::html_nodes("#A option") %>% rvest::html_attr("value"))
 
   regiao.df <- suppressWarnings(data.frame(id = page %>% rvest::html_nodes("#S1 option") %>% rvest::html_text()%>%trimws(),
@@ -321,7 +321,8 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
     # if (is.character(periodo)) {
     #   periodo <- as.numeric(periodo)
     # }
-
+    print(periodo)
+    print(paste0(periodos.df$id,collapse=","))
     if (!(all(periodo %in% periodos.df$id))) stop("The 'periodo' argument is misspecified")
 
   }
@@ -469,8 +470,8 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   }
 
   #periodo
-  suppressWarnings( if (periodo == "last") {periodo <- utils::head(periodos.df$id, 1)} )
-  suppressWarnings( if (periodo == "all") {periodo <- periodos.df$id} )
+  suppressWarnings( if (any(periodo == "last")) {periodo <- utils::head(periodos.df$id, 1)} )
+  suppressWarnings( if (any(periodo == "all")) {periodo <- periodos.df$id} )
   form_periodo <- dplyr::filter(periodos.df, periodos.df$id %in% periodo)
   form_periodo <- paste0("Arquivos=", form_periodo$value, collapse = "&")
 
