@@ -257,9 +257,9 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
     esfera_juridica.df$id[1]  <- esfera_administrativa.df$id[1]  <- "all"
   natureza.df$id[1]  <- tipo_de_estabelecimento.df$id[1]  <-
     tipo_de_gestao.df$id[1]  <-  tipo_de_prestador.df$id[1]  <-  "all"
-  ocupacoes_nivel_superior[1] <- ocupacoes_nivel_tecnico_aux[1] <-
-    ocupacoes_nivel_elementar[1] <- ocupacoes_administrativas[1] <-
-    ocupacoes_em_geral[1] <- ocupacoes_medicos[1] <- atende_no_sus[1] <- "all"
+  ocupacoes_nivel_superior.df$id[1] <- ocupacoes_nivel_tecnico_aux.df$id[1] <-
+    ocupacoes_nivel_elementar.df$id[1] <- ocupacoes_administrativas.df$id[1] <-
+    ocupacoes_em_geral.df$id[1] <- ocupacoes_medicos.df$id[1] <- atende_no_sus.df$id[1] <- "all"
 
   #### ERROR HANDLING ####
   if (linha != "Munic\u00edpio") {
@@ -701,6 +701,8 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
      "formato=table&mostre=Mostra", sep = "&")
 
   form_data <- gsub("\\\\u00", "%", form_data)
+
+
 
   ##### REQUEST FORM AND DATA WRANGLING ####
   site <- httr::POST(url = "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?cnes/cnv/prid02br.def",
