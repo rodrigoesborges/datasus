@@ -22,7 +22,7 @@
 #'                   ocupacoes_administrativas = "all",
 #'                   ocupacoes_em_geral = "all",
 #'                   ocupacoes_medicos = "all",
-#'                   atende_no_sus = "all)
+#'                   atende_no_sus = "all")
 #' @param linha A character describing which element will be displayed in the rows of the data.frame. Defaults to "Município".
 #' @param coluna A character describing which element will be displayed in the columns of the data.frame. Defaults to "Não ativa".
 #' @param conteudo fixed to 1 since the only variable is quantity.
@@ -58,7 +58,7 @@
 #' @param ocupacoes_em_geral "all"  or a numeric vector with the occupation category of health professional to filter by.
 #' @param ocupacoes_medicos "all"  or a numeric vector with the occupation category of medics to filter by.
 #' @param atende_no_sus "all" or yes/no (Sim/Não)
-
+#'
 #' @return The function returns a data frame printed/filtered by parameters input.
 #' @author Rodrigo E. S. Borges \email{<rodrigoesborges@@gmail.com>}
 #' @seealso \code{\link{cnes_equipebr_mun}}

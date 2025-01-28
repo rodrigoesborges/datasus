@@ -21,7 +21,7 @@ cnes_prid02br_mun(linha = "Município", coluna = "Não ativa", conteudo = 1,
                   ocupacoes_administrativas = "all",
                   ocupacoes_em_geral = "all",
                   ocupacoes_medicos = "all",
-                  atende_no_sus = "all)
+                  atende_no_sus = "all")
 }
 \arguments{
 \item{linha}{A character describing which element will be displayed in the rows of the data.frame. Defaults to "Município".}
