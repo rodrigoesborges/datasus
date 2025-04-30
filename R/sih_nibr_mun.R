@@ -3,11 +3,11 @@
 #' This function allows the user to retrieve data from
 #' SIH-CNV's ICD-10 database much in the same way that is done
 #' by the online portal. The argument options refer to
-#' hospital internations by morbidity and place of residence
+#' hospital internations by morbidity and health provider address
 #' data focused on brazilian
 #' cities and age ranging between 5-74 years old.
 #'
-#' @usage sih_nrbr_mun(linha = "Município", coluna = "Não ativa",
+#' @usage sih_nibr_mun(linha = "Município", coluna = "Não ativa",
 #'   conteudo = 1, periodo = "last", municipio = "all", capital = "all",
 #'   cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all",
 #'   ride = "all", territorio_da_cidadania = "all", mesorregiao_pndr = "all",
@@ -47,7 +47,7 @@
 #' @examples
 #' \dontrun{
 #' ## Requesting data from the city of Campo Grande/MS
-#' sih_nrbr_mun(municipio = 500270)
+#' sih_nibr_mun(municipio = 500270)
 #' }
 #'
 #' @keywords SIM datasus causas evitáveis
@@ -55,7 +55,7 @@
 #' @importFrom utils head
 #' @export
 
-sih_nrbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1, periodo = "last", municipio = "all",
+sih_nibr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1, periodo = "last", municipio = "all",
                             capital = "all", cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all", ride = "all",
                             territorio_da_cidadania = "all", mesorregiao_pndr = "all", amazonia_legal = "all", semiarido = "all",
                             faixa_de_fronteira = "all", zona_de_fronteira = "all", municipio_de_extrema_pobreza = "all",
@@ -63,7 +63,7 @@ sih_nrbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
                             faixa_etaria_detalhada = "all", sexo = "all", cor_raca = "all") {
 
 
-  page <- xml2::read_html("http://tabnet.datasus.gov.br/cgi/deftohtm.exe?sih/cnv/nrbr.def")
+  page <- xml2::read_html("http://tabnet.datasus.gov.br/cgi/deftohtm.exe?sih/cnv/nibr.def")
 
   #### DF ####
   linha.df <- data.frame(id = page %>% rvest::html_nodes("#L option") %>% rvest::html_text() %>% trimws(),
@@ -620,7 +620,7 @@ sih_nrbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
   form_data <- gsub("\\\\u00", "%", form_data)
 
   ##### REQUEST FORM AND DATA WRANGLING ####
-  site <- httr::POST(url = "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrbr.def",
+  site <- httr::POST(url = "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nibr.def",
                      body = form_data)
 
   tabdados <- httr::content(site, encoding = "Latin1") %>%
