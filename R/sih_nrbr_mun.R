@@ -586,7 +586,7 @@ sih_nrbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
 
   #categoria_cid10
   form_categoria_cid10 <- dplyr::filter(categoria_cid10.df, categoria_cid10.df$id %in% categoria_cid10)
-  form_categoria_cid10 <- paste0("SCategoria_CID-10=", form_categoria_cid10$value, collapse = "&")
+  form_categoria_cid10 <- paste0("SLista_Morb__CID-10=", form_categoria_cid10$value, collapse = "&")
 
   #faixa_etaria
   form_faixa_etaria <- dplyr::filter(faixa_etaria.df, faixa_etaria.df$id %in% faixa_etaria)
@@ -620,6 +620,7 @@ sih_nrbr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
   form_data <- gsub("\\\\u00", "%", form_data)
 
   ##### REQUEST FORM AND DATA WRANGLING ####
+
   site <- httr::POST(url = "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrbr.def",
                      body = form_data)
 

@@ -81,7 +81,7 @@ sih_nibr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
 
   periodos.df <- data.frame(id = page %>% rvest::html_nodes("#A option") %>% rvest::html_text() %>% trimws(),
                             value = page %>% rvest::html_nodes("#A option") %>% rvest::html_attr("value"))
-  print(class(periodos.df$id))
+
 
   municipios.df <- suppressWarnings(data.frame(id = page %>% rvest::html_nodes("#S1 option") %>% rvest::html_text() %>% readr::parse_number(),
                                                value = page %>% rvest::html_nodes("#S1 option") %>% rvest::html_attr("value")))
@@ -150,7 +150,7 @@ sih_nibr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
   categoria_cid10.df <- data.frame(id = page %>% rvest::html_nodes("#S17 option") %>% rvest::html_text() %>% trimws(),
                                     value = page %>% rvest::html_nodes("#S17 option") %>% rvest::html_attr("value"))
   categoria_cid10.df[] <- lapply(categoria_cid10.df, as.character)
-  categoria_cid10.df$id <- gsub(" .*$", "", categoria_cid10.df$id)
+  #categoria_cid10.df$id <- gsub(" .*$", "", categoria_cid10.df$id)
 
   faixa_etaria.df <- data.frame(id = page %>% rvest::html_nodes("#S18 option") %>% rvest::html_text() %>% trimws(),
                                 value = page %>% rvest::html_nodes("#S18 option") %>% rvest::html_attr("value"))
@@ -584,9 +584,11 @@ sih_nibr_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", co
 
   form_pesqmes16 <- "pesqmes16=Digite+o+texto+e+ache+f%E1cil"
 
+  form_pesqmes17 <- "pesqmes17=Digite+o+texto+e+ache+f%E1cil"
+
   #categoria_cid10
   form_categoria_cid10 <- dplyr::filter(categoria_cid10.df, categoria_cid10.df$id %in% categoria_cid10)
-  form_categoria_cid10 <- paste0("SCategoria_CID-10=", form_categoria_cid10$value, collapse = "&")
+  form_categoria_cid10 <- paste0("SLista_Morb__CID-10=", form_categoria_cid10$value, collapse = "&")
 
   #faixa_etaria
   form_faixa_etaria <- dplyr::filter(faixa_etaria.df, faixa_etaria.df$id %in% faixa_etaria)
