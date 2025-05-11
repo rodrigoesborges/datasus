@@ -3,6 +3,7 @@
 export(cnes_equipebr_mun)
 export(cnes_prid02br_mun)
 export(ibge_popsvs_mun)
+export(ibge_popt2024br_mun)
 export(ibge_poptbr_mun)
 export(ibge_projpop_bruf)
 export(ibge_projpopuf_bruf)
