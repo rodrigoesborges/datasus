@@ -614,7 +614,7 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
 
   #ocupacoes_nivel_superior
   form_ocupacoes_nivel_superior <- dplyr::filter(ocupacoes_nivel_superior.df,
-                                                ocupacoes_nivel_superior.df$id %in%
+                                                ocupacoes_nivel_superior.df$value %in%
                                                   ocupacoes_nivel_superior)
   form_ocupacoes_nivel_superior <- paste0("SOcupa\u00E7\u00F5es_de_N\u00EDvel_Superior=",
                                          form_ocupacoes_nivel_superior$value,
@@ -659,7 +659,7 @@ cnes_prid02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
 
   #ocupacoes_medicos
   form_ocupacoes_medicos <- dplyr::filter(ocupacoes_medicos.df,
-                                           ocupacoes_medicos.df$id %in%
+                                           ocupacoes_medicos.df$value %in%
                                              ocupacoes_medicos)
   form_ocupacoes_medicos <- paste0("SM\u00E9dicos=",
                                     form_ocupacoes_medicos$value,
