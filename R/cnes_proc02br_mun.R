@@ -103,9 +103,9 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
                           value = page %>% rvest::html_nodes("#C option") %>% rvest::html_attr("value"))
   coluna.df[] <- lapply(coluna.df, as.character)
 
-  conteudo.df <- data.frame(id1 = 1,
-                            id2 = "Quantidade",
-                            value = "Quantidade")
+  conteudo.df <- data.frame(id1 = 1:3,
+                            id2 = c("Total","Atende ao SUS","Não atende ao SUS"),
+                            value = c("Total",'Atende_ao_SUS',"N\\u00e3o_atende_ao_SUS"))
 
   periodos.df <- data.frame(id = page %>% rvest::html_nodes("#A option") %>% rvest::html_text()%>%trimws(),
                             value = page %>% rvest::html_nodes("#A option") %>% rvest::html_attr("value"))
@@ -659,7 +659,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
 
   #ocupacoes_medicos
   form_ocupacoes_medicos <- dplyr::filter(ocupacoes_medicos.df,
-                                          ocupacoes_medicos.df$id %in%
+                                          ocupacoes_medicos.df$value %in%
                                             ocupacoes_medicos)
   form_ocupacoes_medicos <- paste0("SM\u00E9dicos=",
                                    form_ocupacoes_medicos$value,
