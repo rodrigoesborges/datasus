@@ -22,7 +22,7 @@
 #'                   ocupacoes_administrativas = "all",
 #'                   ocupacoes_em_geral = "all",
 #'                   ocupacoes_medicos = "all",
-#'                   atende_no_sus = "all")
+#'                   profissionais_selecionados = "all")
 #' @param linha A character describing which element will be displayed in the rows of the data.frame. Defaults to "Município".
 #' @param coluna A character describing which element will be displayed in the columns of the data.frame. Defaults to "Não ativa".
 #' @param conteudo fixed to 1 since the only variable is quantity.
@@ -57,7 +57,7 @@
 #' @param ocupacoes_administrativas "all"  or a numeric vector with the occupation category of administrative health professional to filter by.
 #' @param ocupacoes_em_geral "all"  or a numeric vector with the occupation category of health professional to filter by.
 #' @param ocupacoes_medicos "all"  or a numeric vector with the occupation category of medics to filter by.
-#' @param atende_no_sus "all" or yes/no (Sim/Não)
+#' @param profissionais_selecionados "all" or
 #'
 #' @return The function returns a data frame printed/filtered by parameters input.
 #' @author Rodrigo E. S. Borges \email{<rodrigoesborges@@gmail.com>}
@@ -73,7 +73,7 @@
 #' @importFrom utils head
 #' @export
 
-cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa", conteudo = 1,
+cnes_proc02br_mun <- function(linha = "Munic\u00EDpio", coluna = "N\u00E3o ativa", conteudo = 1,
                               periodo = "last", regiao = "all", unidade_da_federacao = "all",
                               municipio = "all", municipio_gestor = "all", capital = "all",
                               cir = "all", macrorregiao_de_saude = "all", microrregiao_ibge = "all",
@@ -90,7 +90,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
                               ocupacoes_administrativas = "all",
                               ocupacoes_em_geral = "all",
                               ocupacoes_medicos = "all",
-                              atende_no_sus = "all") {
+                              profissionais_selecionados = "all") {
 
   page <- xml2::read_html("http://tabnet.datasus.gov.br/cgi/deftohtm.exe?cnes/cnv/proc02br.def")
 
@@ -241,7 +241,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
     id = page %>% rvest::html_nodes("#S30 option") %>% rvest::html_text() %>% trimws(),
     value = page %>% rvest::html_nodes("#S30 option") %>% rvest::html_attr("value"))
 
-  atende_no_sus.df <- data.frame(
+  profissionais_selecionados.df <- data.frame(
     id = page %>% rvest::html_nodes("#S31 option") %>% rvest::html_text() %>% trimws(),
     value = page %>% rvest::html_nodes("#S31 option") %>% rvest::html_attr("value"))
 
@@ -259,10 +259,10 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
     tipo_de_gestao.df$id[1]  <-  tipo_de_prestador.df$id[1]  <-  "all"
   ocupacoes_nivel_superior.df$id[1] <- ocupacoes_nivel_tecnico_aux.df$id[1] <-
     ocupacoes_nivel_elementar.df$id[1] <- ocupacoes_administrativas.df$id[1] <-
-    ocupacoes_em_geral.df$id[1] <- ocupacoes_medicos.df$id[1] <- atende_no_sus.df$id[1] <- "all"
+    ocupacoes_em_geral.df$id[1] <- ocupacoes_medicos.df$id[1] <- profissionais_selecionados.df$id[1] <- "all"
 
   #### ERROR HANDLING ####
-  if (linha != "Munic\u00edpio") {
+  if (linha != "Munic\u00EDpio") {
 
     if (!is.character(linha)) stop("The 'linha' argument must be a character element")
 
@@ -280,7 +280,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
 
   }
 
-  if (coluna != "N\u00e3o ativa") {
+  if (coluna != "N\u00E3o ativa") {
 
     if (!is.character(coluna)) stop("The 'coluna' argument must be a character element")
 
@@ -561,7 +561,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   form_ensino_pesquisa <- dplyr::filter(
     ensino_pesquisa.df,ensino_pesquisa.df$id %in%
       ensino_pesquisa)
-  form_ensino_pesquisa <- paste0("SEnsino/Pesquisa=",form_ensino_pesquisa$value,collapse="&")
+  form_ensino_pesquisa <- paste0("SEnsino%2FPesquisa=",form_ensino_pesquisa$value,collapse="&")
 
   #natureza_juridica
   form_natureza_juridica <- dplyr::filter(natureza_juridica.df,natureza_juridica.df$id %in% natureza_juridica)
@@ -614,9 +614,10 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
 
   #ocupacoes_nivel_superior
   form_ocupacoes_nivel_superior <- dplyr::filter(ocupacoes_nivel_superior.df,
-                                                 ocupacoes_nivel_superior.df$value %in%
+                                                 ocupacoes_nivel_superior.df$id %in%
+                                                   ocupacoes_nivel_superior|ocupacoes_nivel_superior.df$value %in%
                                                    ocupacoes_nivel_superior)
-  form_ocupacoes_nivel_superior <- paste0("SOcupa\u00E7\u00F5es_de_N\u00EDvel_Superior=",
+  form_ocupacoes_nivel_superior <- paste0("SOcupa%E7%F5es_de_N%EDvel_Superior=",
                                           form_ocupacoes_nivel_superior$value,
                                           collapse="&")
   form_pesqmes25 <- "pesqmes25=Digite+o+texto+e+ache+f%E1cil"
@@ -625,7 +626,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   form_ocupacoes_nivel_tecnico_aux <- dplyr::filter(ocupacoes_nivel_tecnico_aux.df,
                                                     ocupacoes_nivel_tecnico_aux.df$id %in%
                                                       ocupacoes_nivel_tecnico_aux)
-  form_ocupacoes_nivel_tecnico_aux <- paste0("SOcupa\u00E7\u00F5es_de_N\u00EDvel_T\u00E9c_Aux=",
+  form_ocupacoes_nivel_tecnico_aux <- paste0("SOcupa%E7%F5es_de_N%EDvel_T%E9c_Aux=",
                                              form_ocupacoes_nivel_tecnico_aux$value,
                                              collapse="&")
   form_pesqmes26 <- "pesqmes26=Digite+o+texto+e+ache+f%E1cil"
@@ -634,7 +635,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   form_ocupacoes_nivel_elementar <- dplyr::filter(ocupacoes_nivel_elementar.df,
                                                   ocupacoes_nivel_elementar.df$id %in%
                                                     ocupacoes_nivel_elementar)
-  form_ocupacoes_nivel_elementar <- paste0("SOcupa\u00E7\u00F5es_de_N\u00EDvel_Elementar=",
+  form_ocupacoes_nivel_elementar <- paste0("SOcupa%E7%F5es_de_N%EDvel_Elementar=",
                                            form_ocupacoes_nivel_elementar$value,
                                            collapse="&")
   form_pesqmes27 <- "pesqmes27=Digite+o+texto+e+ache+f%E1cil"
@@ -643,7 +644,7 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   form_ocupacoes_administrativas <- dplyr::filter(ocupacoes_administrativas.df,
                                                   ocupacoes_administrativas.df$id %in%
                                                     ocupacoes_administrativas)
-  form_ocupacoes_administrativas <- paste0("SOcupa\u00E7\u00F5es_Administrativas=",
+  form_ocupacoes_administrativas <- paste0("SOcupa%E7%F5es_Administrativas=",
                                            form_ocupacoes_administrativas$value,
                                            collapse="&")
   form_pesqmes28 <- "pesqmes28=Digite+o+texto+e+ache+f%E1cil"
@@ -652,56 +653,61 @@ cnes_proc02br_mun <- function(linha = "Munic\u00edpio", coluna = "N\u00e3o ativa
   form_ocupacoes_em_geral <- dplyr::filter(ocupacoes_em_geral.df,
                                            ocupacoes_em_geral.df$id %in%
                                              ocupacoes_em_geral)
-  form_ocupacoes_em_geral <- paste0("SOcupa\u00E7\u00F5es_em_geral=",
+  form_ocupacoes_em_geral <- paste0("SOcupa%E7%F5es_em_geral=",
                                     form_ocupacoes_em_geral$value,
                                     collapse="&")
   form_pesqmes29 <- "pesqmes29=Digite+o+texto+e+ache+f%E1cil"
 
   #ocupacoes_medicos
   form_ocupacoes_medicos <- dplyr::filter(ocupacoes_medicos.df,
+                                          ocupacoes_medicos.df$id %in%
+                                            ocupacoes_medicos|
                                           ocupacoes_medicos.df$value %in%
                                             ocupacoes_medicos)
-  form_ocupacoes_medicos <- paste0("SM\u00E9dicos=",
+  form_ocupacoes_medicos <- paste0("SM%E9dicos=",
                                    form_ocupacoes_medicos$value,
                                    collapse="&")
   form_pesqmes30 <- "pesqmes30=Digite+o+texto+e+ache+f%E1cil"
 
-  #atendenosus
-  form_atende_no_sus <- dplyr::filter(atende_no_sus.df,
-                                      atende_no_sus.df$id %in%
-                                        atende_no_sus)
-  form_atende_no_sus <- paste0("SAtende_no_SUS=",
-                               form_atende_no_sus$value,
+  #profissionais_selecionados
+  form_pesqmes31 <- "pesqmes31=Digite+o+texto+e+ache+f%E1cil"
+
+  form_profissionais_selecionados <- dplyr::filter(profissionais_selecionados.df,
+                                      profissionais_selecionados.df$id %in%
+                                        profissionais_selecionados)
+  form_profissionais_selecionados <- paste0("SProfissionais_selecionados=",
+                               form_profissionais_selecionados$value,
                                collapse="&")
 
 
 
   form_data <- paste(
-    form_linha, form_coluna, form_conteudo, form_periodo, form_regiao, form_unidade_da_federacao,
-    form_pesqmes2, form_municipio, form_pesqmes3,form_municipio_gestor,
-    form_pesqmes4,form_capital,form_pesqmes5,
-    form_cir, form_pesqmes6, form_macrorregiao_de_saude, form_pesqmes7,
-    form_microrregiao_ibge, form_pesqmes8, form_ride, form_pesqmes9,
-    form_territorio_da_cidadania,
-    form_pesqmes10, form_mesorregiao_pndr, form_pesqmes11, form_amazonia_legal,
+    form_linha, form_coluna, form_conteudo, form_periodo,
+    form_regiao, form_pesqmes2,form_unidade_da_federacao,
+    form_pesqmes3, form_municipio,form_pesqmes4,form_municipio_gestor,
+    form_pesqmes5,form_capital,
+    form_pesqmes6,form_cir,  form_pesqmes7,form_macrorregiao_de_saude,
+    form_pesqmes8, form_microrregiao_ibge, form_pesqmes9,form_ride,
+    form_pesqmes10, form_territorio_da_cidadania,
+    form_pesqmes11, form_mesorregiao_pndr, form_amazonia_legal,
     form_semiarido, form_faixa_de_fronteira,
     form_zona_de_fronteira, form_municipio_de_extrema_pobreza,
-    form_ensino_pesquisa,form_natureza_juridica,
-    form_pesqmes18,form_esfera_juridica,form_pesqmes19,
-    form_esfera_administrativa,form_natureza,form_pesqmes21,
-    form_tipo_de_estabelecimento,form_pesqmes22,
+    form_ensino_pesquisa,form_pesqmes18,form_natureza_juridica,
+    form_pesqmes19,form_esfera_juridica,
+    form_esfera_administrativa,form_pesqmes21,form_natureza,
+    form_pesqmes22,form_tipo_de_estabelecimento,
     form_tipo_de_gestao,form_tipo_de_prestador,
-    form_ocupacoes_nivel_superior,form_pesqmes25,
-    form_ocupacoes_nivel_tecnico_aux,form_pesqmes26,
-    form_ocupacoes_nivel_elementar,form_pesqmes27,
-    form_ocupacoes_administrativas,form_pesqmes28,
-    form_ocupacoes_em_geral,form_pesqmes29,
-    form_ocupacoes_medicos,form_pesqmes30,
-    form_atende_no_sus,
+    form_pesqmes25,form_ocupacoes_nivel_superior,
+    form_pesqmes26,form_ocupacoes_nivel_tecnico_aux,
+    form_pesqmes27,form_ocupacoes_nivel_elementar,
+    form_pesqmes28,form_ocupacoes_administrativas,
+    form_pesqmes29,form_ocupacoes_em_geral,
+    form_pesqmes30,
+    form_ocupacoes_medicos,form_pesqmes31,
+    form_profissionais_selecionados,
     "formato=table&mostre=Mostra", sep = "&")
 
   form_data <- gsub("\\\\u00", "%", form_data)
-
 
 
   ##### REQUEST FORM AND DATA WRANGLING ####

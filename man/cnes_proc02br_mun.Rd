@@ -21,7 +21,7 @@ cnes_proc02br_mun(linha = "Município", coluna = "Não ativa", conteudo = 1,
                   ocupacoes_administrativas = "all",
                   ocupacoes_em_geral = "all",
                   ocupacoes_medicos = "all",
-                  atende_no_sus = "all")
+                  profissionais_selecionados = "all")
 }
 \arguments{
 \item{linha}{A character describing which element will be displayed in the rows of the data.frame. Defaults to "Município".}
@@ -92,7 +92,7 @@ cnes_proc02br_mun(linha = "Município", coluna = "Não ativa", conteudo = 1,
 
 \item{ocupacoes_medicos}{"all"  or a numeric vector with the occupation category of medics to filter by.}
 
-\item{atende_no_sus}{"all" or yes/no (Sim/Não)}
+\item{profissionais_selecionados}{"all" or}
 }
 \value{
 The function returns a data frame printed/filtered by parameters input.
